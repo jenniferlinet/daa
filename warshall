@@ -1,0 +1,43 @@
+import java.util.Scanner; 
+public class warshalls { 
+static final int MAX = 20; // max. size of cost matrix 
+static int a[][]; // cost matrix 
+static int n; // actual matrix size 
+public static void main(String args[]) { 
+a = new int[MAX][MAX]; 
+System.out.println("*****WARSHALL'S ALGORTIHM*****"); 
+ReadMatrix(); 
+Warshalls(); // find all pairs shortest path 
+PrintMatrix(); 
+} 
+static void ReadMatrix() { 
+System.out.println("Enter the number of vertices\n"); 
+Scanner scanner = new Scanner(System.in); 
+n = scanner.nextInt(); 
+System.out.println("Enter the Adjacency Matrix (1 if there is edge and 0 if there is no direct edge) \n"); 
+for (int i = 1; i <= n; i++) { 
+for (int j = 1; j <= n; j++) { 
+a[i][j] = scanner.nextInt(); 
+} 
+} 
+scanner.close(); 
+} 
+static void Warshalls() { 
+for (int k = 1; k <= n; k++) { 
+for (int i = 1; i <= n; i++) 
+for (int j = 1; j <= n; j++) 
+if(a[i][j] == 1 || a[i][k] == 1 && a[k][j] == 1)
+a[i][j] = 1; 
+} 
+} 
+static void PrintMatrix() { 
+System.out.println("The Transitive Closure Matrix is:\n"); 
+for(int i=1; i<=n; i++) 
+{ 
+for(int j=1; j<=n; j++) 
+System.out.print(a[i][j] + "\t"); 
+System.out.println("\n"); 
+} 
+}
+ }
+
